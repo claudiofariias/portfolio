@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navigation toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    initPrivateProjectMessage();
     
     if (navToggle) {
         navToggle.addEventListener('click', function() {
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animate elements on scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.skill-category, .project-card, .contact-info, .contact-form');
+        const elements = document.querySelectorAll('.skill-category, .project-card, .contact-info, .contact-illustration');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
@@ -59,26 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     };
-
-    function initPrivateProjectMessage() {
-    document.querySelectorAll('.view-details').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Esconde o link "Ver Detalhes"
-            this.style.display = 'none';
-            
-            // Mostra a mensagem de projeto privado
-            const privateMessage = this.nextElementSibling;
-            if (privateMessage && privateMessage.classList.contains('project-private')) {
-                privateMessage.style.display = 'block';
-            }
-        });
-    });
-}
     
     // Set initial state for animated elements
-    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .contact-info, .contact-form');
+    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .contact-info, .contact-illustration');
     animatedElements.forEach(element => {
         element.style.opacity = 0;
         element.style.transform = 'translateY(20px)';
@@ -89,19 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateOnScroll);
     // Trigger once on load
     animateOnScroll();
-    
-    // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Here you would normally send the form data to a server
-            // For this example, we'll just show an alert
-            alert('Obrigado pela mensagem! Entrarei em contato em breve.');
-            contactForm.reset();
-        });
-    }
     
     // Project card hover effect enhancement
     const projectCards = document.querySelectorAll('.project-card');
@@ -121,4 +90,25 @@ document.addEventListener('DOMContentLoaded', function() {
         item.style.animationDelay = `${index * 0.1}s`;
         item.style.animation = 'fadeIn 0.5s ease forwards';
     });
+    
+    // Função para mostrar mensagem de projeto privado
+    function initPrivateProjectMessage() {
+        document.querySelectorAll('.view-details').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Esconde o link "Ver Detalhes"
+                this.style.display = 'none';
+                
+                // Mostra a mensagem de projeto privado
+                const privateMessage = this.nextElementSibling;
+                if (privateMessage && privateMessage.classList.contains('project-private')) {
+                    privateMessage.style.display = 'block';
+                }
+            });
+        });
+    }
+    
+    // Inicializar quando o documento estiver pronto
+    initPrivateProjectMessage();
 });
